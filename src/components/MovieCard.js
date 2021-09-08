@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import { StarFilled } from "@ant-design/icons";
-import { Card, Skeleton, Spin } from "antd";
+import { Card } from "antd";
 import Meta from "antd/lib/card/Meta";
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-
-const posterBaseUrl = "https://image.tmdb.org/t/p/original";
+import { posterBaseUrl } from "../api/tmdbApi/apiInfo";
+import ImageContainer from "./ImageContainer";
 
 const Rating = ({ rating }) => (
   <div style={{ position: "relative" }}>
@@ -27,46 +27,25 @@ const Rating = ({ rating }) => (
   </div>
 );
 
-const MovieCard = ({ isLarge, movie }) => {
-  const [imgLoaded, setImgLoaded] = useState(false);
-  function handleImgLoaded() {
-    setImgLoaded(true);
-  }
-
-  const noImg = isLarge ? !movie.poster_path : !movie.backdrop_path;
-  return (
-    <Card
-      hoverable
-      style={{ width: "80%", margin: "20px auto" }}
-      cover={
-        <Link to={`/movies/${movie.id}`}>
-          {(!imgLoaded || noImg) && (
-            <Spin spinning={!noImg}>
-              <Skeleton.Image
-                style={{ width: "100%", height: isLarge ? 455 : 165 }}
-              />
-            </Spin>
-          )}
-          <img
-            alt={movie.title}
-            src={`${posterBaseUrl}${
-              isLarge ? movie.poster_path : movie.backdrop_path
-            }`}
-            onLoad={handleImgLoaded}
-            width="100%"
-            style={{
-              display: imgLoaded ? "block" : "none",
-            }}
-          />
-        </Link>
-      }
-    >
-      <Meta
-        title={movie.title}
-        avatar={<Rating rating={movie.vote_average} />}
-      />
-    </Card>
-  );
-};
+const MovieCard = ({ isLarge, movie }) => (
+  <Card
+    hoverable
+    style={{ width: "80%", margin: "20px auto" }}
+    cover={
+      <Link to={`/movies/${movie.id}`}>
+        <ImageContainer
+          src={`${posterBaseUrl}${
+            isLarge ? movie.poster_path : movie.backdrop_path
+          }`}
+          alt={movie.title}
+          width="100%"
+          SkeletonStyle={{ width: "100%", height: isLarge ? 455 : 165 }}
+        />
+      </Link>
+    }
+  >
+    <Meta title={movie.title} avatar={<Rating rating={movie.vote_average} />} />
+  </Card>
+);
 
 export default MovieCard;

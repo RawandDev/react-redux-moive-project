@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 // import requests from "./reuqests/requests";
 // import Row from "./components/Row";
 // import Slider from "./containers/Slider";
+import { Layout } from "antd";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import About from "./pages/about";
@@ -19,19 +20,23 @@ import Loader from "./components/Loader";
 function App() {
   return (
     <Loader>
-      <Navbar />
-      {/* <Genres /> */}
-      {/* <Row fetchUrl={requests.fetchTrending} /> */}
-      <Switch>
-        <Route path="/movies" component={MoviesPage} />
-        <Route path="/genre" component={GenresPage} />
-        <Route path="/about" component={About} />
-        <Route path="/actors/:id" component={ActorDetail} />
-        <Route path="/actors" exact component={actors} />
-        <Route path="/" exact component={home} />
-        <Route component={Error} />
-      </Switch>
-      <Footer />
+      <Layout>
+        <Navbar />
+        <Layout.Content style={{ padding: "30px" }}>
+          {/* <Genres /> */}
+          {/* <Row fetchUrl={requests.fetchTrending} /> */}
+          <Switch>
+            <Route path="/movies" component={MoviesPage} />
+            <Route path="/genre" component={GenresPage} />
+            <Route path="/about" component={About} />
+            <Route path="/actors/:id" component={ActorDetail} />
+            <Route path="/actors" exact component={actors} />
+            <Route path="/" exact component={home} />
+            <Route component={Error} />
+          </Switch>
+        </Layout.Content>
+        <Footer />
+      </Layout>
     </Loader>
   );
 }

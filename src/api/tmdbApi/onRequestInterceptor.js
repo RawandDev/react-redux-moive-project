@@ -11,10 +11,9 @@ export const onSuccessRequest = (config) => {
     queryParams.push(`page=${config.page}`);
   }
   if (typeof config.query === "string") {
-    console.log(config.query);
     queryParams.push(`query=${config.query.split(" ").join("+")}`);
   }
-  config.url += queryParams.join("&");
+  config.url += `?${queryParams.join("&")}`;
   console.log(config.url);
   return config;
 };

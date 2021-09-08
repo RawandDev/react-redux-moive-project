@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouteMatch, Switch, Route } from "react-router-dom";
 import MoviesContainer from "../containers/MoviesContainer";
+import SingleMovieContainer from "../containers/SingleMovieContainer";
 
 const MoviesPage = () => {
   const { path } = useRouteMatch();
@@ -13,9 +14,9 @@ const MoviesPage = () => {
       <Route exact path={`${path}/search`}>
         <MoviesContainer search />
       </Route>
-      {/* <Route path={`${path}/:id`} >
+      <Route path={`${path}/:id`}>
         <SingleMovieContainer />
-      </Route> */}
+      </Route>
     </Switch>
   );
 };
