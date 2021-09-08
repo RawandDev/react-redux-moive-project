@@ -6,9 +6,38 @@
 
 body {
   background: #1a1a1a !important;
-  color: white !important;
+  color: #1a1a1a !important;
 }
 
 .ant-skeleton-element {
   width: 100% !important;
+}
+
+.relative {
+  position: relative
+}
+
+.btn-next {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+}
+
+.btn-back {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+}
+
+.btn-carousel {
+  appearance: none;
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 2px;
+  color: #06c;
+  border: solid 1px #ddd;
+}
+.btn-carousel:disabled {
+opacity: 0.5;
+cursor: not-allowed;
 }
