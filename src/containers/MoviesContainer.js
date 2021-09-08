@@ -12,14 +12,13 @@ const MoviesContainer = ({ movies, fetchMovies, searchMovies, search }) => {
   const queryParams = useQuery() ?? {};
   const history = useHistory();
 
-  const { query, page } = queryParams;
-
-  console.log("search is", search);
+  const { query, page, genre } = queryParams;
 
   useEffect(() => {
     if (!search) {
       fetchMovies({
         page,
+        genre,
       });
     } else {
       searchMovies({
@@ -27,7 +26,7 @@ const MoviesContainer = ({ movies, fetchMovies, searchMovies, search }) => {
         query,
       });
     }
-  }, [fetchMovies, page, query, search, searchMovies]);
+  }, [fetchMovies, genre, page, query, search, searchMovies]);
 
   const handleSearch = (q) => {
     if (!q) return;
