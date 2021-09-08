@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./Row.css";
 import axios from "axios";
 import PropTypes from "prop-types";
-import { Skeleton, Progress } from "antd";
+import { Skeleton } from "antd";
+import MovieCard from "./MovieCard";
 
 function Row({ title, fetchUrl, isLarge }) {
   const [movie, setMovie] = useState([]);
   const [isLoading, setisLoading] = useState(false);
-
-  const posterBaseUrl = "https://image.tmdb.org/t/p/original";
 
   Row.propTypes = {
     title: PropTypes.string.isRequired,
@@ -41,30 +40,7 @@ function Row({ title, fetchUrl, isLarge }) {
       ) : (
         <div className="poster_path">
           {movie?.map((m) => (
-            <div className="card_wrapper">
-              <img
-                key={m.id}
-                className={`row_poster ${isLarge && "row_posterLarge"}`}
-                src={`${posterBaseUrl}${
-                  isLarge ? m.poster_path : m.backdrop_path
-                }`}
-                alt={m.name}
-              />
-              <Progress
-                strokeColor={m.vote_average >= 8 ? "green" : "red"}
-                style={{
-                  position: "absolute",
-                  bottom: "0",
-                  left: "0",
-                  zIndex: "100",
-                  background: "white",
-                  borderRadius: "0 100px 100px 100px",
-                }}
-                type="circle"
-                percent={m.vote_average * 10}
-                width={40}
-              />
-            </div>
+            <MovieCard key={m.id} movie={m} isLarge={isLarge} />
           ))}
         </div>
       )}

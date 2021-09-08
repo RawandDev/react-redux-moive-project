@@ -13,14 +13,17 @@ import actors from "./pages/actors";
 import ActorDetail from "./components/ActorDetail";
 import Error from "./components/Error";
 import GenresPage from "./pages/genres";
+import MoviesPage from "./pages/movies";
+import Loader from "./components/Loader";
 
 function App() {
   return (
-    <div>
+    <Loader>
       <Navbar />
       {/* <Genres /> */}
       {/* <Row fetchUrl={requests.fetchTrending} /> */}
       <Switch>
+        <Route path="/movies" component={MoviesPage} />
         <Route path="/genre" component={GenresPage} />
         <Route path="/about" component={About} />
         <Route path="/actors/:id" component={ActorDetail} />
@@ -29,7 +32,7 @@ function App() {
         <Route component={Error} />
       </Switch>
       <Footer />
-    </div>
+    </Loader>
   );
 }
 

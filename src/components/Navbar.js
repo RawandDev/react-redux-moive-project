@@ -13,25 +13,6 @@ const { SubMenu } = Menu;
 
 function Navbar() {
   const [current, setCurrent] = useState("mail");
-  // const [genre, setGenre] = useState([]);
-  // const [type, setType] = useState();
-  // const [isLoading, setIsLoading] = useState(false);
-
-  // const URL = `https://api.themoviedb.org/3/discover/movie?api_key=e15bbb219d7a04f817488309f7efe37f&with_genres=${type}`;
-
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   fetch(URL)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setGenre(data.results);
-  //       setIsLoading(false);
-  //     });
-  // }, [URL, type]);
-
-  // console.log(genre);
-
-  // console.log(URL);
 
   const handleClick = (e) => {
     setCurrent(e.key);
@@ -53,6 +34,11 @@ function Navbar() {
         <Menu.Item key="home" icon={<HomeTwoTone />}>
           <Link style={{ color: "white" }} to="/">
             Home
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="movies" icon={<HomeTwoTone />}>
+          <Link style={{ color: "white" }} to="/movies">
+            Movies
           </Link>
         </Menu.Item>
         <Menu.Item key="about" icon={<QuestionCircleTwoTone />}>

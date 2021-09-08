@@ -6,4 +6,9 @@
 
 body {
   background: #1a1a1a !important;
+  color: white !important;
+}
+
+.ant-skeleton-element {
+  width: 100% !important;
 }
