@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import { Menu } from "antd";
@@ -105,23 +106,67 @@ function Navbar({ genres, fetchGenres }) {
             style={{ color: "grey" }}
             key="genres"
             icon={<ContainerOutlined />}
-            title="Genres"
+            title={t("genres")}
           >
-            {genres.map((genre) => (
-              <Menu.Item key={genre.id}>
-                <Link to={`/movies?genre=${genre.id}`}>{genre.name}</Link>
-              </Menu.Item>
-            ))}
+            {genres.map((genre) => {
+              const genreNames = genre.name;
+              return (
+                <Menu.Item key={genre.id}>
+                  <Link to={`/movies?genre=${genre.id}`}>
+                    {console.log(genre.name)}
+                    {genreNames === "Action"
+                      ? t("action")
+                      : genreNames === "Adventure"
+                      ? t("adventure")
+                      : genreNames === "Animation"
+                      ? t("animation")
+                      : genreNames === "Comedy"
+                      ? t("comedy")
+                      : genreNames === "Crime"
+                      ? t("crime")
+                      : genreNames === "Documentary"
+                      ? t("documentary")
+                      : genreNames === "Drama"
+                      ? t("drama")
+                      : genreNames === "Family"
+                      ? t("family")
+                      : genreNames === "Fantasy"
+                      ? t("fantasy")
+                      : genreNames === "History"
+                      ? t("history")
+                      : genreNames === "Horror"
+                      ? t("horror")
+                      : genreNames === "Music"
+                      ? t("music")
+                      : genreNames === "Mystery"
+                      ? t("mystery")
+                      : genreNames === "Romance"
+                      ? t("romance")
+                      : genreNames === "Science Fiction"
+                      ? t("science_fiction")
+                      : genreNames === "TV Movie"
+                      ? t("tv_movie")
+                      : genreNames === "Thriller"
+                      ? t("thriller")
+                      : genreNames === "War"
+                      ? t("war")
+                      : genreNames === "Western"
+                      ? t("western")
+                      : genreNames}
+                  </Link>
+                </Menu.Item>
+              );
+            })}
           </SubMenu>
         )}
         <SubMenu
           style={{ color: "grey" }}
           key="User"
           icon={<SettingFilled />}
-          title="User"
+          title={t("user")}
         >
           <Menu.ItemGroup
-            title={`${currentUser ? currentUser?.email : "Default User"}`}
+            title={`${currentUser ? currentUser?.email : t("default_user")}`}
           />
           <Menu.Item key="setting:2">
             <Link to="/login">{t("login")}</Link>
