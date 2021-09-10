@@ -7,20 +7,32 @@ import {
   VideoCameraAddOutlined,
   HomeOutlined,
   TeamOutlined,
+  SettingFilled,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { genres as genresApi } from "../api/tmdbApi";
-// import Genres from "./Genres";
+import { auth } from "../firebase/firebase";
 
 const { SubMenu } = Menu;
 
 function Navbar({ genres, fetchGenres }) {
   const [current, setCurrent] = useState("mail");
+  const [currentUser, setCurrentUser] = useState([]);
 
   useEffect(() => {
     fetchGenres();
   }, [fetchGenres]);
+  useEffect(() => {
+    const subscribe = auth.onAuthStateChanged((user) => {
+      console.log("user:", user);
+      setCurrentUser(user);
+    });
+
+    return subscribe;
+  }, []);
+
+  console.log("navbar currentUser:", currentUser);
 
   const handleClick = (e) => {
     setCurrent(e.key);
@@ -73,6 +85,25 @@ function Navbar({ genres, fetchGenres }) {
             ))}
           </SubMenu>
         )}
+        <SubMenu
+          style={{ color: "white" }}
+          key="User"
+          icon={<SettingFilled />}
+          title="User"
+        >
+          <Menu.ItemGroup
+            title={`${currentUser ? currentUser?.email : "Default User"}`}
+          />
+          <Menu.Item key="setting:2">
+            <Link to="/login">Log In</Link>
+          </Menu.Item>
+
+          <Menu.Item key="setting:3">
+            <Link to="/signup">Sign Up</Link>
+          </Menu.Item>
+        </SubMenu>
+        {/* {currentUser && currentUser?.email} */}
+        {/* <button type="button">Log Out</button> */}
       </Menu>
     </div>
   );
