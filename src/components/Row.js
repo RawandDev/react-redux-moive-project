@@ -7,6 +7,7 @@ import { Skeleton, Progress } from "antd";
 function Row({ title, fetchUrl, isLarge }) {
   const [movie, setMovie] = useState([]);
   const [isLoading, setisLoading] = useState(false);
+  // const [currentUser, setCurrentUser] = useState("");
 
   const posterBaseUrl = "https://image.tmdb.org/t/p/original";
 
@@ -32,6 +33,14 @@ function Row({ title, fetchUrl, isLarge }) {
     // I disabled the warning for this line. It will automatically add `instance` as dependency which causes memory leak
     // eslint-disable-next-line
   }, [fetchUrl]);
+
+  // useEffect(() => {
+  //   const subscribe = auth.onAuthStateChanged((user) => {
+  //     setCurrentUser(user);
+  //   });
+
+  //   return subscribe;
+  // }, []);
 
   return (
     <div className="row">
