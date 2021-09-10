@@ -13,5 +13,13 @@
   "switch_langs": "Switch languages",
 
   "Top Rated": "Top Rated",
-  "Trending": "Trending"
+  "Trending": "Trending",
+
+  "user_loggedin": "You are logged in as",
+  "logout": "Logout",
+
+  "login_with_your_account": "Login with your account",
+  "email": "Email",
+  "password": "Password",
+  "need_an_account": "Need an account?"
 }
