@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import ActorsContainer from "../containers/ActorsContainer";
+import SingleActorContainer from "../containers/SingleActorContainer";
 
 function ActorsPage() {
   const { path } = useRouteMatch();
@@ -12,9 +13,9 @@ function ActorsPage() {
       <Route exact path={`${path}/search`}>
         <ActorsContainer search />
       </Route>
-      {/* <Route path={`${path}/:id`}>
-        <SingleMovieContainer />
-      </Route> */}
+      <Route path={`${path}/:id`}>
+        <SingleActorContainer />
+      </Route>
     </Switch>
   );
 }

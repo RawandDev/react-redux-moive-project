@@ -1,45 +1,30 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { movies as moviesApi } from "../api/tmdbApi";
 import Error from "../components/Error";
 import SingleMovie from "../components/SingleMovie";
-import { setError, setLoading } from "../store/reducers/tmdbSlice";
 
-const SingleMovieContainer = ({
-  error,
-  dispatchSetLoading,
-  dispatchSetError,
-}) => {
+const SingleMovieContainer = ({ error, movie, fetchSingleMovie }) => {
   const { id } = useParams();
-  const [movie, setMovie] = useState({});
 
   useEffect(() => {
     if (id) {
-      dispatchSetLoading(true);
-      moviesApi
-        .fetchSingle(id)
-        .then((data) => setMovie(data))
-        .catch((err) =>
-          dispatchSetError(
-            err.response?.status === 404
-              ? "Movie not found"
-              : "Something went wrong"
-          )
-        )
-        .finally(() => dispatchSetLoading(false));
+      fetchSingleMovie(id);
     }
-  }, [dispatchSetError, dispatchSetLoading, id]);
+  }, [fetchSingleMovie, id]);
 
   console.log(movie);
-  return error ? <Error /> : <SingleMovie movie={movie} />;
+  return error ? <Error /> : <SingleMovie data={movie.data} />;
 };
 
-const mapStateToProps = ({ tmdb: { loading, error } }) => ({ loading, error });
+const mapStateToProps = ({ tmdb: { singleMovie, error } }) => ({
+  movie: singleMovie,
+  error,
+});
 const mapDispatchToProps = {
-  dispatchSetLoading: setLoading,
-  dispatchSetError: setError,
+  fetchSingleMovie: moviesApi.fetchSingle,
 };
 export default connect(
   mapStateToProps,

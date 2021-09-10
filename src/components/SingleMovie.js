@@ -14,10 +14,10 @@ import ImageContainer from "./ImageContainer";
 // - Tha ability to bookmark the movie.
 // - Once you click on an actor you move to their page.
 
-const SingleMovie = ({ movie }) => {
+const SingleMovie = ({ data }) => {
   let type;
 
-  if (movie.vote_average < 6) {
+  if (data?.vote_average < 6) {
     type = "danger";
   } else if (type < 8) {
     type = "warning";
@@ -29,13 +29,13 @@ const SingleMovie = ({ movie }) => {
     <Row justify="center" gutter={16}>
       <Col xs={24} md={12} lg={6}>
         <ImageContainer
-          src={`${posterBaseUrl}${movie?.poster_path}`}
+          src={`${posterBaseUrl}${data?.poster_path}`}
           width="100%"
         />
       </Col>
       <Col xs={24} md={12}>
         <Space direction="vertical">
-          <Typography.Title italic>{movie.title}</Typography.Title>
+          <Typography.Title italic>{data?.title}</Typography.Title>
           <Space align="center">
             <StarFilled
               style={{
@@ -44,12 +44,12 @@ const SingleMovie = ({ movie }) => {
               }}
             />
             <Typography.Title style={{ marginBottom: 0 }} level={3} type={type}>
-              {movie.vote_average} out of 10
+              {data?.vote_average} out of 10
             </Typography.Title>
             <Typography.Title style={{ marginBottom: 0 }} level={3}>
               •
             </Typography.Title>
-            <Typography.Text code>{movie.vote_count} votes</Typography.Text>
+            <Typography.Text code>{data?.vote_count} votes</Typography.Text>
           </Space>
           <Typography.Title
             level={3}
@@ -58,7 +58,7 @@ const SingleMovie = ({ movie }) => {
             The Story
           </Typography.Title>
           <Typography.Text strong type="secondary">
-            {movie.overview}
+            {data?.overview}
           </Typography.Text>
         </Space>
       </Col>
