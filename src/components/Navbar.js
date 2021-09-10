@@ -1,21 +1,28 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import React, { useEffect, useState } from "react";
 import { Menu } from "antd";
 import {
-  HomeTwoTone,
-  SmileTwoTone,
-  QuestionCircleTwoTone,
-  ContainerTwoTone,
-  SettingTwoTone,
+  QuestionCircleOutlined,
+  ContainerOutlined,
+  VideoCameraAddOutlined,
+  HomeOutlined,
+  TeamOutlined,
+  SettingFilled,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { genres as genresApi } from "../api/tmdbApi";
 import { auth } from "../firebase/firebase";
 
 const { SubMenu } = Menu;
 
-function Navbar() {
+function Navbar({ genres, fetchGenres }) {
   const [current, setCurrent] = useState("mail");
   const [currentUser, setCurrentUser] = useState([]);
 
+  useEffect(() => {
+    fetchGenres();
+  }, [fetchGenres]);
   useEffect(() => {
     const subscribe = auth.onAuthStateChanged((user) => {
       console.log("user:", user);
@@ -38,51 +45,50 @@ function Navbar() {
         mode="horizontal"
         style={{
           background: "black",
-          color: "white",
+          color: "grey",
           border: "none",
           display: "flex",
           justifyContent: "center",
         }}
       >
-        <Menu.Item key="home" icon={<HomeTwoTone />}>
-          <Link style={{ color: "white" }} to="/">
+        <Menu.Item key="home" icon={<HomeOutlined />}>
+          <Link style={{ color: "grey" }} to="/">
             Home
           </Link>
         </Menu.Item>
-        <Menu.Item key="about" icon={<QuestionCircleTwoTone />}>
-          <Link style={{ color: "white" }} to="/about">
+        <Menu.Item key="movies" icon={<VideoCameraAddOutlined />}>
+          <Link style={{ color: "grey" }} to="/movies">
+            Movies
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="about" icon={<QuestionCircleOutlined />}>
+          <Link style={{ color: "grey" }} to="/about">
             About
           </Link>
         </Menu.Item>
-        <Menu.Item key="actors" icon={<SmileTwoTone />}>
-          <Link style={{ color: "white" }} to="/actors">
+        <Menu.Item key="actors" icon={<TeamOutlined />}>
+          <Link style={{ color: "grey" }} to="/actors">
             Actors
           </Link>
         </Menu.Item>
+        {genres?.length > 0 && (
+          <SubMenu
+            style={{ color: "grey" }}
+            key="genres"
+            icon={<ContainerOutlined />}
+            title="Genres"
+          >
+            {genres.map((genre) => (
+              <Menu.Item key={genre.id}>
+                <Link to={`/movies?genre=${genre.id}`}>{genre.name}</Link>
+              </Menu.Item>
+            ))}
+          </SubMenu>
+        )}
         <SubMenu
-          style={{ color: "white" }}
-          key="genres"
-          icon={<ContainerTwoTone />}
-          title="genres"
-        >
-          <Menu.ItemGroup title="Actions">
-            <Menu.Item key="setting:1">
-              <Link to="/genre/35">Actions</Link>
-            </Menu.Item>
-          </Menu.ItemGroup>
-          <Menu.ItemGroup title="Top Rated">
-            <Menu.Item key="setting:2">Top Rated</Menu.Item>
-          </Menu.ItemGroup>
-          <Menu.ItemGroup title="Animation">
-            <Menu.Item key="setting:3">
-              <Link to="/genre/16">Animation</Link>
-            </Menu.Item>
-          </Menu.ItemGroup>
-        </SubMenu>
-        <SubMenu
-          style={{ color: "white" }}
+          style={{ color: "grey" }}
           key="User"
-          icon={<SettingTwoTone />}
+          icon={<SettingFilled />}
           title="User"
         >
           <Menu.ItemGroup
@@ -103,4 +109,8 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+const mapStateToProps = ({ tmdb: { genres } }) => ({ genres });
+const mapDispatchToProps = {
+  fetchGenres: genresApi.fetchMovieGenres,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

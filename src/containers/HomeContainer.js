@@ -1,18 +1,35 @@
-import React from "react";
+/* eslint-disable react/prop-types */
+import React, { useEffect } from "react";
 import "../components/Row.css";
-import Row from "../components/Row";
-import requests from "../reuqests/requests";
-// import { useFetch } from "../hooks/useFetch";
+import { connect } from "react-redux";
+import MovieCarousel from "../components/MovieCarousel";
+import { movies as moviesApi } from "../api/tmdbApi";
 
-function HomeContainer() {
-  //   const { loading, setQuery, setLoading } = useFetch();
-
+function HomeContainer({
+  popularMovies,
+  trendingMovies,
+  fetchPopularMovies,
+  fetchTrendingMovies,
+}) {
+  useEffect(() => {
+    fetchPopularMovies();
+    fetchTrendingMovies();
+  }, [fetchPopularMovies, fetchTrendingMovies]);
   return (
     <>
-      <Row fetchUrl={requests.fetchTopRated} title="Top Rated" isLarge />
-      <Row fetchUrl={requests.fetchTrending} title="Trending" isLarge />
+      <MovieCarousel movies={popularMovies} title="Most Popular" />
+      <MovieCarousel movies={trendingMovies} title="Most Trending" />
     </>
   );
 }
 
-export default HomeContainer;
+const mapStateToProps = ({ tmdb: { popularMovies, trendingMovies } }) => ({
+  popularMovies,
+  trendingMovies,
+});
+
+const mapDispatchToProps = {
+  fetchTrendingMovies: moviesApi.fetchTrending,
+  fetchPopularMovies: moviesApi.fetchPopular,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

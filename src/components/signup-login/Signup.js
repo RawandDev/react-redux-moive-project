@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signup } from "../../features/auth/authSlice";
+import { signup } from "../../store/reducers/authSlice";
 import { auth } from "../../firebase/firebase";
 import "./LogoutButton.css";
 import "./Buttons.css";
