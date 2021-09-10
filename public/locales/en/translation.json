@@ -21,5 +21,9 @@
   "login_with_your_account": "Login with your account",
   "email": "Email",
   "password": "Password",
-  "need_an_account": "Need an account?"
+  "need_an_account": "Need an account?",
+
+  "create_an_account": "Create an account",
+  "confirm_password": "Confirm password",
+  "have_an_account": "Have an account?"
 }

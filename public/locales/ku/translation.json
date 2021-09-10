@@ -20,5 +20,9 @@
   "login_with_your_account": "چوونە ژوورەوە بە ھەژمارەکەت",
   "email": "ئیمێل",
   "password": "وشەی تێپەر",
-  "need_an_account": "پێویستت بە هەژمارێکی نوێیە؟"
+  "need_an_account": "پێویستت بە هەژمارێکی نوێیە؟",
+
+  "create_an_account": "هەژمارێکی نوێ دروست بکە",
+  "confirm_password": "وشەی تێپەر بنووسەرەوە",
+  "have_an_account": "هەژمارێکت هەیە؟"
 }

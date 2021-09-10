@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { signup } from "../../features/auth/authSlice";
 import { auth } from "../../firebase/firebase";
 import "./LogoutButton.css";
@@ -64,6 +65,8 @@ function Signup() {
     singupAuth();
   }
 
+  const { t } = useTranslation();
+
   console.log(error);
 
   return (
@@ -79,19 +82,19 @@ function Signup() {
       {currentUser ? (
         <div>
           <h1 style={{ color: "white" }}>
-            You are already logged in as {currentUser.email}
+            {t("user_loggedin")} {currentUser.email}
           </h1>
           <button
             type="button"
             onClick={() => auth.signOut()}
             className="logout"
           >
-            Logout
+            {t("logout")}
           </button>
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <h1 style={{ color: "white" }}>Create an account</h1>
+          <h1 style={{ color: "white" }}>{t("create_an_account")}</h1>
           <div
             style={{
               display: "flex",
@@ -102,7 +105,7 @@ function Signup() {
           >
             <input
               type="email"
-              placeholder="email"
+              placeholder={t("email")}
               value={email}
               onChange={handleEmailChange}
               style={{
@@ -113,7 +116,7 @@ function Signup() {
             />
             <input
               type="password"
-              placeholder="password"
+              placeholder={t("password")}
               value={password}
               onChange={handlePasswordChange}
               style={{
@@ -123,7 +126,7 @@ function Signup() {
             />
             <input
               type="password"
-              placeholder="confirm password"
+              placeholder={t("confirm_password")}
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
               style={{
@@ -133,11 +136,11 @@ function Signup() {
               }}
             />
             <button type="submit" className="fill">
-              SignUp
+              {t("signup")}
             </button>
           </div>
           <p style={{ color: "white" }}>
-            Have an account? <Link to="/login">Login</Link>
+            {t("have_an_account")} <Link to="/login">{t("login")}</Link>
           </p>
           {/* {error && <p>{error}</p>} */}
           {/* user email: {currentUser?.email} */}
