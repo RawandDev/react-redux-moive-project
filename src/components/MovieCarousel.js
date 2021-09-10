@@ -18,7 +18,6 @@ const MovieCarousel = ({ movies, title }) => {
   return (
     <div
       style={{
-        background: "white",
         borderRadius: "2px",
         marginBottom: 30,
       }}

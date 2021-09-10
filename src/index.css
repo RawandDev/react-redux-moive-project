@@ -20,13 +20,13 @@ body {
 .btn-next {
   position: absolute;
   top: 50%;
-  right: 5px;
+  right: -5px;
 }
 
 .btn-back {
   position: absolute;
   top: 50%;
-  left: 5px;
+  left: -5px;
 }
 
 .btn-carousel {

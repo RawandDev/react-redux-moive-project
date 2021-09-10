@@ -1,45 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Col, Row } from "antd";
+import ActorCard from "./ActorCard";
 
-function ActorsList({ actors }) {
-  const posterBaseUrl = "https://image.tmdb.org/t/p/original";
+const ActorsList = ({ actors }) => (
+  <Row justify="center" gutter={16}>
+    {actors.map((actor) => (
+      <Col key={actor.id} xs={24} sm={12} md={8} lg={8} xl={6}>
+        <ActorCard actor={actor} />
+      </Col>
+    ))}
+  </Row>
+);
 
-  ActorsList.propTypes = {
-    actors: PropTypes.arrayOf(
-      PropTypes.shape({
-        color: PropTypes.string.isRequired,
-        fontSize: PropTypes.number.isRequired,
-      })
-    ).isRequired,
-  };
+ActorsList.defaultProps = {
+  actors: [],
+};
 
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
-      }}
-    >
-      {actors.map((actor) => (
-        <div key={actor.id}>
-          <Link to={`/actors/${actor.id}`}>
-            <img
-              style={{
-                height: "12rem",
-                borderRadius: "10px",
-                marginRight: "1rem",
-              }}
-              src={posterBaseUrl + actor.profile_path}
-              alt={actor.name}
-            />
-            <p key={actor.id}>{actor.name}</p>
-          </Link>
-        </div>
-      ))}
-    </div>
-  );
-}
-
+ActorsList.propTypes = {
+  actors: PropTypes.arrayOf(PropTypes.object),
+};
 export default ActorsList;

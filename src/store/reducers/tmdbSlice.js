@@ -112,6 +112,21 @@ const tmdb = createSlice({
       state.error = "Something went wrong!";
     },
 
+    // search actors
+    [actorsApi.search.pending]: (state) => {
+      state.loading = true;
+      state.error = "";
+    },
+    [actorsApi.search.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.error = "";
+      state.actors = action.payload ?? initialState.actors;
+    },
+    [actorsApi.search.rejected]: (state) => {
+      state.loading = false;
+      state.error = "Something went wrong!";
+    },
+
     // genres
     [genresApi.fetchMovieGenres.pending]: (state) => {
       state.loading = true;

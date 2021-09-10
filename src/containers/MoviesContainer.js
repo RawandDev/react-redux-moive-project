@@ -38,10 +38,12 @@ const MoviesContainer = ({ movies, fetchMovies, searchMovies, search }) => {
       if (search) {
         history.push(`/movies/search?query=${query}&page=${currentPage}`);
       } else {
-        history.push(`/movies?page=${currentPage}`);
+        history.push(
+          `/movies?page=${currentPage}${genre ? `&genre=${genre}` : ""}`
+        );
       }
     },
-    [history, query, search]
+    [genre, history, query, search]
   );
 
   return (
@@ -49,7 +51,7 @@ const MoviesContainer = ({ movies, fetchMovies, searchMovies, search }) => {
       <SearchInput handleOnSubmit={handleSearch} search={search} />
       <MoviesList movies={movies?.results} />
       <DataPagination
-        total={movies?.total_pages}
+        total={movies?.total_results}
         handleOnChangePage={handlePageChange}
         search={search}
       />

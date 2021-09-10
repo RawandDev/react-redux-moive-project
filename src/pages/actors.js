@@ -1,12 +1,22 @@
 import React from "react";
-import Actors from "../containers/Actors";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
+import ActorsContainer from "../containers/ActorsContainer";
 
-function actors() {
+function ActorsPage() {
+  const { path } = useRouteMatch();
   return (
-    <div>
-      <Actors />
-    </div>
+    <Switch>
+      <Route exact path={path}>
+        <ActorsContainer />
+      </Route>
+      <Route exact path={`${path}/search`}>
+        <ActorsContainer search />
+      </Route>
+      {/* <Route path={`${path}/:id`}>
+        <SingleMovieContainer />
+      </Route> */}
+    </Switch>
   );
 }
 
-export default actors;
+export default ActorsPage;

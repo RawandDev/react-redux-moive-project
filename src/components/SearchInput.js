@@ -25,7 +25,7 @@ function SearchInput({ handleOnSubmit, search }) {
       }}
     >
       <Input.Search
-        placeholder="search for movies here"
+        placeholder="Type here to search"
         onSearch={handleOnSubmit}
         enterButton
         style={{

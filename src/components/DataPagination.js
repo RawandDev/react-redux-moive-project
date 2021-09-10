@@ -18,13 +18,14 @@ function DataPagination({ total, handleOnChangePage, search }) {
   return (
     <div style={{ margin: "10px 0" }}>
       <Pagination
-        style={{ color: "white", textAlign: "center" }}
+        style={{ color: "#1a1a1a", textAlign: "center" }}
         total={total}
         defaultCurrent={currentPage}
         defaultPageSize={20}
         showSizeChanger={false}
         showTotal={(innerTotal) => `Total ${innerTotal} items`}
         onChange={onPageChange}
+        showQuickJumper={total > 20}
       />
     </div>
   );
