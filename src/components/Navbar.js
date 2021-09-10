@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import { Menu } from "antd";
@@ -8,17 +9,38 @@ import {
   HomeOutlined,
   TeamOutlined,
   SettingFilled,
+  GlobalOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import cookie from "js-cookie";
+import i18next from "i18next";
+import { useTranslation } from "react-i18next";
 import { genres as genresApi } from "../api/tmdbApi";
 import { auth } from "../firebase/firebase";
 
 const { SubMenu } = Menu;
 
+const languages = [
+  {
+    code: "en",
+    name: "English",
+  },
+  {
+    code: "ku",
+    name: "کوردی",
+    dir: "rtl",
+  },
+];
+
 function Navbar({ genres, fetchGenres }) {
   const [current, setCurrent] = useState("mail");
   const [currentUser, setCurrentUser] = useState([]);
+
+  const currentLanguageCode = cookie.get("i18next") || "en";
+  const currentLanguage = languages.find(
+    (lan) => lan.code === currentLanguageCode
+  );
 
   useEffect(() => {
     fetchGenres();
@@ -32,11 +54,19 @@ function Navbar({ genres, fetchGenres }) {
     return subscribe;
   }, []);
 
+  useEffect(() => {
+    document.title = `${i18next.t("Movie App")} - ${currentLanguage.name}`;
+    document.body.dir = currentLanguage.dir || "ltr";
+  }, [currentLanguage.dir, currentLanguage.name, currentLanguage]);
+
   console.log("navbar currentUser:", currentUser);
 
   const handleClick = (e) => {
     setCurrent(e.key);
   };
+
+  const { t } = useTranslation();
+
   return (
     <div>
       <Menu
@@ -53,22 +83,22 @@ function Navbar({ genres, fetchGenres }) {
       >
         <Menu.Item key="home" icon={<HomeOutlined />}>
           <Link style={{ color: "grey" }} to="/">
-            Home
+            {t("home")}
           </Link>
         </Menu.Item>
         <Menu.Item key="movies" icon={<VideoCameraAddOutlined />}>
           <Link style={{ color: "grey" }} to="/movies">
-            Movies
+            {t("movies")}
           </Link>
         </Menu.Item>
         <Menu.Item key="about" icon={<QuestionCircleOutlined />}>
           <Link style={{ color: "grey" }} to="/about">
-            About
+            {t("about")}
           </Link>
         </Menu.Item>
         <Menu.Item key="actors" icon={<TeamOutlined />}>
           <Link style={{ color: "grey" }} to="/actors">
-            Actors
+            {t("actors")}
           </Link>
         </Menu.Item>
         {genres?.length > 0 && (
@@ -76,34 +106,107 @@ function Navbar({ genres, fetchGenres }) {
             style={{ color: "grey" }}
             key="genres"
             icon={<ContainerOutlined />}
-            title="Genres"
+            title={t("genres")}
           >
-            {genres.map((genre) => (
-              <Menu.Item key={genre.id}>
-                <Link to={`/movies?genre=${genre.id}`}>{genre.name}</Link>
-              </Menu.Item>
-            ))}
+            {genres.map((genre) => {
+              const genreNames = genre.name;
+              return (
+                <Menu.Item key={genre.id}>
+                  <Link to={`/movies?genre=${genre.id}`}>
+                    {console.log(genre.name)}
+                    {genreNames === "Action"
+                      ? t("action")
+                      : genreNames === "Adventure"
+                      ? t("adventure")
+                      : genreNames === "Animation"
+                      ? t("animation")
+                      : genreNames === "Comedy"
+                      ? t("comedy")
+                      : genreNames === "Crime"
+                      ? t("crime")
+                      : genreNames === "Documentary"
+                      ? t("documentary")
+                      : genreNames === "Drama"
+                      ? t("drama")
+                      : genreNames === "Family"
+                      ? t("family")
+                      : genreNames === "Fantasy"
+                      ? t("fantasy")
+                      : genreNames === "History"
+                      ? t("history")
+                      : genreNames === "Horror"
+                      ? t("horror")
+                      : genreNames === "Music"
+                      ? t("music")
+                      : genreNames === "Mystery"
+                      ? t("mystery")
+                      : genreNames === "Romance"
+                      ? t("romance")
+                      : genreNames === "Science Fiction"
+                      ? t("science_fiction")
+                      : genreNames === "TV Movie"
+                      ? t("tv_movie")
+                      : genreNames === "Thriller"
+                      ? t("thriller")
+                      : genreNames === "War"
+                      ? t("war")
+                      : genreNames === "Western"
+                      ? t("western")
+                      : genreNames}
+                  </Link>
+                </Menu.Item>
+              );
+            })}
           </SubMenu>
         )}
         <SubMenu
           style={{ color: "grey" }}
           key="User"
           icon={<SettingFilled />}
-          title="User"
+          title={t("user")}
         >
           <Menu.ItemGroup
-            title={`${currentUser ? currentUser?.email : "Default User"}`}
+            title={`${currentUser ? currentUser?.email : t("default_user")}`}
           />
           <Menu.Item key="setting:2">
-            <Link to="/login">Log In</Link>
+            <Link to="/login">{t("login")}</Link>
           </Menu.Item>
 
           <Menu.Item key="setting:3">
-            <Link to="/signup">Sign Up</Link>
+            <Link to="/signup">{t("signup")}</Link>
           </Menu.Item>
         </SubMenu>
-        {/* {currentUser && currentUser?.email} */}
-        {/* <button type="button">Log Out</button> */}
+        <SubMenu
+          style={{ color: "white" }}
+          key="langs"
+          icon={<GlobalOutlined />}
+          title={t("langs")}
+        >
+          <Menu.ItemGroup title={t("switch_langs")}>
+            {languages.map((language) => (
+              <Menu.Item key={language.code}>
+                <button
+                  type="button"
+                  onClick={() => i18next.changeLanguage(language.code)}
+                  disabled={currentLanguage.code === language.code}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    borderRadius: "4px",
+                    fontSize: "1rem",
+                    cursor: "pointer",
+                    width: "100%",
+                    opacity: `${
+                      currentLanguage.code === language.code ? "0.4" : "1"
+                    }`,
+                  }}
+                >
+                  {language.name}
+                </button>
+              </Menu.Item>
+            ))}
+          </Menu.ItemGroup>
+        </SubMenu>
       </Menu>
     </div>
   );
@@ -113,4 +216,5 @@ const mapStateToProps = ({ tmdb: { genres } }) => ({ genres });
 const mapDispatchToProps = {
   fetchGenres: genresApi.fetchMovieGenres,
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

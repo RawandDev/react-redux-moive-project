@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { login } from "../../store/reducers/authSlice";
 import { auth } from "../../firebase/firebase";
 import "./LogoutButton.css";
@@ -35,10 +36,6 @@ function Login() {
     setPassword(event.target.value);
   }
 
-  //   function loginAuth() {
-  //     dispatch(login(email, password));
-  //   }
-
   // login with firebase
   function loginWithFirebase() {
     auth
@@ -61,6 +58,8 @@ function Login() {
 
   //   console.log(error);
 
+  const { t } = useTranslation();
+
   return (
     <div
       style={{
@@ -74,19 +73,19 @@ function Login() {
       {currentUser ? (
         <div>
           <h1 style={{ color: "white" }}>
-            You are logged in as {currentUser.email}
+            {t("user_loggedin")} {currentUser.email}
           </h1>
           <button
             type="button"
             onClick={() => auth.signOut()}
             className="logout"
           >
-            Logout
+            {t("logout")}
           </button>
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <h1 style={{ color: "white" }}>Log in with your account</h1>
+          <h1 style={{ color: "white" }}>{t("login_with_your_account")}</h1>
           <div
             style={{
               display: "flex",
@@ -102,7 +101,7 @@ function Login() {
                 borderRadius: "5px",
               }}
               type="email"
-              placeholder="email"
+              placeholder={t("email")}
               value={email}
               onChange={handleEmailChange}
             />
@@ -113,16 +112,16 @@ function Login() {
                 borderRadius: "5px",
               }}
               type="password"
-              placeholder="password"
+              placeholder={t("password")}
               value={password}
               onChange={handlePasswordChange}
             />
             <button type="submit" className="fill">
-              Log In
+              {t("login")}
             </button>
           </div>
           <p style={{ color: "white" }}>
-            Need an account? <Link to="/signup">Sign Up</Link>
+            {t("need_an_account")} <Link to="/signup">{t("signup")}</Link>
           </p>
           {/* user email: {currentUser && currentUser.email} */}
         </form>

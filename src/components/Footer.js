@@ -6,15 +6,17 @@ import {
   LinkedinOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function Footer() {
+  const { t } = useTranslation();
   return (
     <div>
       <footer>
         <div className="content">
           <div className="top">
             <div className="logo-details">
-              <span className="logo_name">idkTV</span>
+              <span className="logo_name">{t("idk_tv")}</span>
             </div>
             <div className="media-icons">
               <a href="#test">
@@ -30,36 +32,36 @@ function Footer() {
           </div>
           <div className="link-boxes">
             <ul className="box">
-              <li className="link_name">Links</li>
+              <li className="link_name">{t("links")}</li>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/">{t("home")}</Link>
               </li>
               <li>
-                <Link to="/about">About</Link>
+                <Link to="/about">{t("about")}</Link>
               </li>
               <li>
-                <Link to="/actors">Actors</Link>
-              </li>
-            </ul>
-            <ul className="box">
-              <li className="link_name">Techs</li>
-              <li>
-                <a href="#test">API</a>
-              </li>
-              <li>
-                <a href="#test">React</a>
-              </li>
-              <li>
-                <a href="#test">Ant Design</a>
-              </li>
-              <li>
-                <a href="#test">React Redux</a>
+                <Link to="/actors">{t("actors")}</Link>
               </li>
             </ul>
             <ul className="box">
-              <li className="link_name">Contact</li>
+              <li className="link_name">{t("techs")}</li>
               <li>
-                <a href="#test">+012 3456789</a>
+                <a href="#test">{t("api")}</a>
+              </li>
+              <li>
+                <a href="#test">{t("react")}</a>
+              </li>
+              <li>
+                <a href="#test">{t("ant_design")}</a>
+              </li>
+              <li>
+                <a href="#test">{t("redux")}</a>
+              </li>
+            </ul>
+            <ul className="box">
+              <li className="link_name">{t("contact")}</li>
+              <li>
+                <a href="#test">+1234 567 89 00</a>
               </li>
               <li>
                 <a href="#test">contact@idkTV.com</a>
@@ -69,13 +71,13 @@ function Footer() {
         </div>
         <div className="bottom-details">
           <div className="bottom_text">
-            <span className="copyright_text">Copyright © 2021 idkTV</span>
+            <span className="copyright_text">{t("copyright")}</span>
             <label htmlFor="email" className="newsletter_container">
-              <span>Subscribe to our newsletter</span>
-              <input type="email" placeholder="Email" />
+              <span>{t("subscribe")}</span>
+              <input type="email" placeholder={t("email")} />
             </label>
             <span className="policy_terms">
-              <a href="#test">Privacy policy</a>
+              <a href="#test">{t("privacy_policy")}</a>
             </span>
           </div>
         </div>
