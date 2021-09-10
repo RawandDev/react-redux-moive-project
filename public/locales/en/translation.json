@@ -10,5 +10,8 @@
   "login": "Login",
   "signup": "Signup",
   "langs": "Languages",
-  "switch_langs": "Switch languages"
+  "switch_langs": "Switch languages",
+
+  "Top Rated": "Top Rated",
+  "Trending": "Trending"
 }

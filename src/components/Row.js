@@ -3,6 +3,7 @@ import "./Row.css";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { Skeleton, Progress } from "antd";
+import { useTranslation } from "react-i18next";
 
 function Row({ title, fetchUrl, isLarge }) {
   const [movie, setMovie] = useState([]);
@@ -42,9 +43,11 @@ function Row({ title, fetchUrl, isLarge }) {
   //   return subscribe;
   // }, []);
 
+  const { t } = useTranslation();
+
   return (
     <div className="row">
-      <h1 style={{ color: "white" }}>{title}</h1>
+      <h1 style={{ color: "white" }}>{t(`${title}`)}</h1>
       {isLoading ? (
         <Skeleton />
       ) : (
