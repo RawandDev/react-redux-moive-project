@@ -1,43 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { Input } from "antd";
 
-function SearchInput({ queryHandler, loadingHandler }) {
-  const [queryValue, setQueryValue] = useState("");
+function SearchInput({ handleOnSubmit, search }) {
+  const [query, setQuery] = useState("");
 
   function handleChange(e) {
-    setQueryValue(e.target.value);
+    setQuery(e.target.value);
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    loadingHandler(false);
-    queryHandler(queryValue);
-  }
-
-  SearchInput.propTypes = {
-    queryHandler: PropTypes.func.isRequired,
-    loadingHandler: PropTypes.func.isRequired,
-  };
+  useEffect(() => {
+    if (!search) {
+      setQuery("");
+    }
+  }, [search]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <div>
-          <input
-            type="text"
-            placeholder="Search anything..."
-            onChange={handleChange}
-          />
-
-          <div>
-            <button type="submit" onClick={handleSubmit}>
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
-    </form>
+    <div
+      style={{
+        width: "100%",
+        margin: "20px auto",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <Input.Search
+        placeholder="search for movies here"
+        onSearch={handleOnSubmit}
+        enterButton
+        style={{
+          width: 260,
+        }}
+        value={query}
+        onChange={handleChange}
+      />
+    </div>
   );
 }
+
+SearchInput.propTypes = {
+  handleOnSubmit: PropTypes.func.isRequired,
+  search: PropTypes.bool,
+};
+
+SearchInput.defaultProps = {
+  search: false,
+};
 
 export default SearchInput;

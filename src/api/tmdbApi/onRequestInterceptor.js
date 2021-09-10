@@ -10,7 +10,10 @@ export const onSuccessRequest = (config) => {
   if (config.page && config.page >= 1 && config.page <= 100) {
     queryParams.push(`page=${config.page}`);
   }
-  config.url += queryParams.join("&");
+  if (typeof config.query === "string") {
+    queryParams.push(`query=${config.query.split(" ").join("+")}`);
+  }
+  config.url += `?${queryParams.join("&")}`;
   console.log(config.url);
   return config;
 };

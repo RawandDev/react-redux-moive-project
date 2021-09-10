@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import requests from "../reuqests/requests";
 import ActorsList from "../components/ActorsList";
-import ActorsPagination from "../components/ActorsPagination";
+import ActorsPagination from "../components/DataPagination";
 
 function Actors() {
   const [actors, setActors] = useState([]);
