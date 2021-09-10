@@ -9,8 +9,6 @@ const useMediaQuery = (query) => {
       setMatches(mq.matches);
     }
 
-    console.log(mq);
-
     const listener = () => setMatches(mq.matches);
 
     mq.addEventListener("change", listener);

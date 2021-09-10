@@ -10,10 +10,10 @@ import {
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
-import MovieCard from "./MovieCard";
 import useMediaQuery from "../hooks/useMediaQuery";
+import ActorCard from "./ActorCard";
 
-const MovieCarousel = ({ movies, title }) => {
+const ActorCarousel = ({ actors, title }) => {
   const isMediumScreen = useMediaQuery("(min-width: 992px)");
 
   return (
@@ -29,15 +29,15 @@ const MovieCarousel = ({ movies, title }) => {
 
       <CarouselProvider
         naturalSlideWidth={100}
-        naturalSlideHeight={100}
-        totalSlides={movies.length}
+        naturalSlideHeight={150}
+        totalSlides={actors.length}
         visibleSlides={isMediumScreen ? 4 : 1}
         className="relative"
       >
         <Slider>
-          {movies.map((movie, index) => (
-            <Slide key={movie.id} index={index}>
-              <MovieCard movie={movie} />
+          {actors.map((actor, index) => (
+            <Slide key={actor.id} index={index}>
+              <ActorCard actor={actor} />
             </Slide>
           ))}
         </Slider>
@@ -52,9 +52,13 @@ const MovieCarousel = ({ movies, title }) => {
   );
 };
 
-MovieCarousel.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
-  title: PropTypes.string.isRequired,
+ActorCarousel.propTypes = {
+  actors: PropTypes.arrayOf(PropTypes.object).isRequired,
+  title: PropTypes.string,
 };
 
-export default MovieCarousel;
+ActorCarousel.defaultProps = {
+  title: "",
+};
+
+export default ActorCarousel;

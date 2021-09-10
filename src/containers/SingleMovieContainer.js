@@ -9,13 +9,19 @@ import SingleMovie from "../components/SingleMovie";
 const SingleMovieContainer = ({ error, movie, fetchSingleMovie }) => {
   const { id } = useParams();
 
+  console.log(movie);
+
   useEffect(() => {
     if (id) {
-      fetchSingleMovie(id);
+      fetchSingleMovie({
+        id,
+        config: {
+          append: "credits,similar,videos",
+        },
+      });
     }
   }, [fetchSingleMovie, id]);
 
-  console.log(movie);
   return error ? <Error /> : <SingleMovie data={movie.data} />;
 };
 

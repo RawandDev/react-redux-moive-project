@@ -14,8 +14,6 @@ function ActorsContainer({ actors, fetchActors, searchActors, search }) {
 
   const { query, page } = queryParams;
 
-  console.log(searchActors);
-
   useEffect(() => {
     if (!search) {
       fetchActors({

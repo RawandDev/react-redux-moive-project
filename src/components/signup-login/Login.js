@@ -25,8 +25,6 @@ function Login() {
     return subscribe;
   }, []);
 
-  console.log("currentUser login:", currentUser);
-
   function handleEmailChange(event) {
     setEmail(event.target.value);
   }

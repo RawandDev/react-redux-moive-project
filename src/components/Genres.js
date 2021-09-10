@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 // eslint-disable-next-line
 function Genres() {
   const { genre } = useParams();
-  console.log(genre);
 
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

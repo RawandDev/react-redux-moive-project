@@ -13,8 +13,11 @@ export const onSuccessRequest = (config) => {
   if (typeof config.query === "string") {
     queryParams.push(`query=${config.query.split(" ").join("+")}`);
   }
+  if (config.append) {
+    queryParams.push(`append_to_response=${config.append}`);
+  }
   config.url += `?${queryParams.join("&")}`;
-  console.log(config.url);
+  console.log(config);
   return config;
 };
 

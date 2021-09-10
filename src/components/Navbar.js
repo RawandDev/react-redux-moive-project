@@ -25,14 +25,11 @@ function Navbar({ genres, fetchGenres }) {
   }, [fetchGenres]);
   useEffect(() => {
     const subscribe = auth.onAuthStateChanged((user) => {
-      console.log("user:", user);
       setCurrentUser(user);
     });
 
     return subscribe;
   }, []);
-
-  console.log("navbar currentUser:", currentUser);
 
   const handleClick = (e) => {
     setCurrent(e.key);

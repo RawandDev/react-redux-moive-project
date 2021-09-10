@@ -34,7 +34,11 @@ function DataPagination({ total, handleOnChangePage, search }) {
 DataPagination.propTypes = {
   total: PropTypes.number.isRequired,
   handleOnChangePage: PropTypes.func.isRequired,
-  search: PropTypes.bool.isRequired,
+  search: PropTypes.bool,
+};
+
+DataPagination.defaultProps = {
+  search: false,
 };
 
 export default DataPagination;

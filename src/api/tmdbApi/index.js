@@ -30,7 +30,7 @@ export const movies = {
     tmdbInstance.get("movie/latest", config).then((res) => res.data)
   ),
 
-  fetchSingle: createAsyncThunk("tmdb/movies/fetchSingle", (id, config) =>
+  fetchSingle: createAsyncThunk("tmdb/movies/fetchSingle", ({ id, config }) =>
     tmdbInstance.get(`movie/${id}`, config).then((res) => res.data)
   ),
 };
@@ -39,11 +39,11 @@ export const actors = {
   fetch: createAsyncThunk("tmdb/actors/fetch", (config) =>
     tmdbInstance.get("person/popular", config).then((res) => res.data)
   ),
-  fetchSingle: createAsyncThunk("tmdb/actors/fetchSingle", (id, config) =>
-    tmdbInstance.get(`person/${id}`, config).then((res) => res.data)
-  ),
   search: createAsyncThunk("tmdb/actors/search", (config) =>
     tmdbInstance.get("search/person", config).then((res) => res.data)
+  ),
+  fetchSingle: createAsyncThunk("tmdb/actors/fetchSingle", ({ id, config }) =>
+    tmdbInstance.get(`person/${id}`, config).then((res) => res.data)
   ),
 };
 
