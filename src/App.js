@@ -16,6 +16,8 @@ import Error from "./components/Error";
 import GenresPage from "./pages/genres";
 import MoviesPage from "./pages/movies";
 import Loader from "./components/Loader";
+import signup from "./pages/signup";
+import login from "./pages/login";
 
 function App() {
   return (
@@ -23,9 +25,9 @@ function App() {
       <Layout>
         <Navbar />
         <Layout.Content style={{ padding: "30px" }}>
-          {/* <Genres /> */}
-          {/* <Row fetchUrl={requests.fetchTrending} /> */}
           <Switch>
+            <Route path="/login" component={login} />
+            <Route path="/signup" component={signup} />
             <Route path="/movies" component={MoviesPage} />
             <Route path="/genre" component={GenresPage} />
             <Route path="/about" component={About} />

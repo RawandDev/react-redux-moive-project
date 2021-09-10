@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.16.13",
     "axios": "^0.21.1",
+    "firebase": "^9.0.1",
     "prop-types": "^15.7.2",
     "pure-react-carousel": "^1.27.6",
     "query-string": "^7.0.1",
