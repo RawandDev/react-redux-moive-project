@@ -7,14 +7,17 @@ export const onSuccessRequest = (config) => {
   if (config.genre) {
     queryParams.push(`with_genres=${config.genre}`);
   }
-  if (config.page && config.page >= 1 && config.page <= 100) {
+  if (config.page && config.page >= 1 && config.page <= 500) {
     queryParams.push(`page=${config.page}`);
   }
   if (typeof config.query === "string") {
     queryParams.push(`query=${config.query.split(" ").join("+")}`);
   }
+  if (config.append) {
+    queryParams.push(`append_to_response=${config.append}`);
+  }
   config.url += `?${queryParams.join("&")}`;
-  console.log(config.url);
+  console.log(config);
   return config;
 };
 

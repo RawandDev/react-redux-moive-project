@@ -5,7 +5,6 @@ import SingleMovieContainer from "../containers/SingleMovieContainer";
 
 const MoviesPage = () => {
   const { path } = useRouteMatch();
-  console.log(path);
   return (
     <Switch>
       <Route exact path={path}>

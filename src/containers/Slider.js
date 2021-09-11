@@ -27,8 +27,6 @@ function Crousel({ fetchUrl }) {
     // eslint-disable-next-line
   }, [fetchUrl]);
 
-  // console.log(movie);
-
   return (
     <div style={{ width: "80vw", margin: "0 auto" }}>
       <Carousel autoplay>

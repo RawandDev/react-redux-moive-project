@@ -26,8 +26,6 @@ function Login() {
     return subscribe;
   }, []);
 
-  console.log("currentUser login:", currentUser);
-
   function handleEmailChange(event) {
     setEmail(event.target.value);
   }
@@ -64,7 +62,7 @@ function Login() {
     <div
       style={{
         textAlign: "center",
-        // color: "white",
+        // color: "black",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -72,7 +70,7 @@ function Login() {
     >
       {currentUser ? (
         <div>
-          <h1 style={{ color: "white" }}>
+          <h1 style={{ color: "black" }}>
             {t("user_loggedin")} {currentUser.email}
           </h1>
           <button
@@ -85,7 +83,7 @@ function Login() {
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <h1 style={{ color: "white" }}>{t("login_with_your_account")}</h1>
+          <h1 style={{ color: "black" }}>{t("login_with_your_account")}</h1>
           <div
             style={{
               display: "flex",
@@ -120,7 +118,7 @@ function Login() {
               {t("login")}
             </button>
           </div>
-          <p style={{ color: "white" }}>
+          <p style={{ color: "black" }}>
             {t("need_an_account")} <Link to="/signup">{t("signup")}</Link>
           </p>
           {/* user email: {currentUser && currentUser.email} */}

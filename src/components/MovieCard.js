@@ -27,25 +27,30 @@ const Rating = ({ rating }) => (
   </div>
 );
 
-const MovieCard = ({ isLarge, movie }) => (
-  <Card
-    hoverable
-    style={{ width: "80%", margin: "20px auto" }}
-    cover={
-      <Link to={`/movies/${movie.id}`}>
-        <ImageContainer
-          src={`${posterBaseUrl}${
-            isLarge ? movie.poster_path : movie.backdrop_path
-          }`}
-          alt={movie.title}
-          width="100%"
-          SkeletonStyle={{ width: "100%", height: isLarge ? 455 : 165 }}
-        />
-      </Link>
-    }
-  >
-    <Meta title={movie.title} avatar={<Rating rating={movie.vote_average} />} />
-  </Card>
-);
+const MovieCard = ({ isLarge, movie }) => {
+  const imgPath = isLarge ? movie.poster_path : movie.backdrop_path;
+
+  return (
+    <Card
+      hoverable
+      style={{ width: "80%", margin: "20px auto" }}
+      cover={
+        <Link to={`/movies/${movie.id}`}>
+          <ImageContainer
+            src={imgPath ? `${posterBaseUrl}${imgPath}` : null}
+            alt={movie.title}
+            width="100%"
+            SkeletonStyle={{ width: "100%", height: isLarge ? 455 : 165 }}
+          />
+        </Link>
+      }
+    >
+      <Meta
+        title={movie.title}
+        avatar={<Rating rating={movie.vote_average} />}
+      />
+    </Card>
+  );
+};
 
 export default MovieCard;

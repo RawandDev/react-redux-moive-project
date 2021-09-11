@@ -19,6 +19,10 @@ const initialState = {
   trendingMovies: [],
   actors: generalInitialState,
   genres: [],
+  singleMovie: {
+    data: {},
+  },
+  singleActor: { data: {} },
   loading: false,
   error: "",
 };
@@ -97,6 +101,21 @@ const tmdb = createSlice({
       state.error = "Something went wrong!";
     },
 
+    // single  Movie
+    [moviesApi.fetchSingle.pending]: (state) => {
+      state.loading = true;
+      state.error = "";
+    },
+    [moviesApi.fetchSingle.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.error = "";
+      state.singleMovie.data = action.payload ?? initialState.singleMovie.data;
+    },
+    [moviesApi.fetchSingle.rejected]: (state) => {
+      state.loading = false;
+      state.error = "Something went wrong!";
+    },
+
     // actors
     [actorsApi.fetch.pending]: (state) => {
       state.loading = true;
@@ -108,6 +127,36 @@ const tmdb = createSlice({
       state.actors = action.payload ?? initialState.actors;
     },
     [actorsApi.fetch.rejected]: (state) => {
+      state.loading = false;
+      state.error = "Something went wrong!";
+    },
+
+    // search actors
+    [actorsApi.search.pending]: (state) => {
+      state.loading = true;
+      state.error = "";
+    },
+    [actorsApi.search.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.error = "";
+      state.actors = action.payload ?? initialState.actors;
+    },
+    [actorsApi.search.rejected]: (state) => {
+      state.loading = false;
+      state.error = "Something went wrong!";
+    },
+
+    // single actor
+    [actorsApi.fetchSingle.pending]: (state) => {
+      state.loading = true;
+      state.error = "";
+    },
+    [actorsApi.fetchSingle.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.error = "";
+      state.singleActor.data = action.payload ?? initialState.singleActor.data;
+    },
+    [actorsApi.fetchSingle.rejected]: (state) => {
       state.loading = false;
       state.error = "Something went wrong!";
     },

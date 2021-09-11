@@ -81,7 +81,7 @@ function Signup() {
     >
       {currentUser ? (
         <div>
-          <h1 style={{ color: "white" }}>
+          <h1 style={{ color: "black" }}>
             {t("user_loggedin")} {currentUser.email}
           </h1>
           <button
@@ -94,7 +94,7 @@ function Signup() {
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <h1 style={{ color: "white" }}>{t("create_an_account")}</h1>
+          <h1 style={{ color: "black" }}>{t("create_an_account")}</h1>
           <div
             style={{
               display: "flex",
@@ -139,7 +139,7 @@ function Signup() {
               {t("signup")}
             </button>
           </div>
-          <p style={{ color: "white" }}>
+          <p style={{ color: "black" }}>
             {t("have_an_account")} <Link to="/login">{t("login")}</Link>
           </p>
           {/* {error && <p>{error}</p>} */}

@@ -47,7 +47,6 @@ function Navbar({ genres, fetchGenres }) {
   }, [fetchGenres]);
   useEffect(() => {
     const subscribe = auth.onAuthStateChanged((user) => {
-      console.log("user:", user);
       setCurrentUser(user);
     });
 
@@ -108,55 +107,11 @@ function Navbar({ genres, fetchGenres }) {
             icon={<ContainerOutlined />}
             title={t("genres")}
           >
-            {genres.map((genre) => {
-              const genreNames = genre.name;
-              return (
-                <Menu.Item key={genre.id}>
-                  <Link to={`/movies?genre=${genre.id}`}>
-                    {console.log(genre.name)}
-                    {genreNames === "Action"
-                      ? t("action")
-                      : genreNames === "Adventure"
-                      ? t("adventure")
-                      : genreNames === "Animation"
-                      ? t("animation")
-                      : genreNames === "Comedy"
-                      ? t("comedy")
-                      : genreNames === "Crime"
-                      ? t("crime")
-                      : genreNames === "Documentary"
-                      ? t("documentary")
-                      : genreNames === "Drama"
-                      ? t("drama")
-                      : genreNames === "Family"
-                      ? t("family")
-                      : genreNames === "Fantasy"
-                      ? t("fantasy")
-                      : genreNames === "History"
-                      ? t("history")
-                      : genreNames === "Horror"
-                      ? t("horror")
-                      : genreNames === "Music"
-                      ? t("music")
-                      : genreNames === "Mystery"
-                      ? t("mystery")
-                      : genreNames === "Romance"
-                      ? t("romance")
-                      : genreNames === "Science Fiction"
-                      ? t("science_fiction")
-                      : genreNames === "TV Movie"
-                      ? t("tv_movie")
-                      : genreNames === "Thriller"
-                      ? t("thriller")
-                      : genreNames === "War"
-                      ? t("war")
-                      : genreNames === "Western"
-                      ? t("western")
-                      : genreNames}
-                  </Link>
-                </Menu.Item>
-              );
-            })}
+            {genres.map((genre) => (
+              <Menu.Item key={genre.id}>
+                <Link to={`/movies?genre=${genre.id}`}>{genre.name}</Link>
+              </Menu.Item>
+            ))}
           </SubMenu>
         )}
         <SubMenu
@@ -177,7 +132,7 @@ function Navbar({ genres, fetchGenres }) {
           </Menu.Item>
         </SubMenu>
         <SubMenu
-          style={{ color: "white" }}
+          style={{ color: "gray" }}
           key="langs"
           icon={<GlobalOutlined />}
           title={t("langs")}

@@ -23,8 +23,6 @@ function ActorDetail({ match }) {
     // eslint-disable-next-line
   }, [match.params.id]);
 
-  console.log(actor, loading);
-
   return (
     <div style={{ color: "white", textAlign: "center" }}>
       <h1 style={{ color: "white" }}>Actor Detail</h1>
