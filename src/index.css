@@ -4,8 +4,16 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "rudaw";
+  src: url("fonts/rudaw.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   background: #1a1a1a !important;
+  font-family: "rudaw" !important;
   color: #1a1a1a !important;
 }
 

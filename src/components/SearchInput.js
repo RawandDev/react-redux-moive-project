@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Input } from "antd";
+import { useTranslation } from "react-i18next";
 
 function SearchInput({ handleOnSubmit, search }) {
   const [query, setQuery] = useState("");
@@ -15,6 +16,8 @@ function SearchInput({ handleOnSubmit, search }) {
     }
   }, [search]);
 
+  const { t } = useTranslation();
+
   return (
     <div
       style={{
@@ -25,7 +28,7 @@ function SearchInput({ handleOnSubmit, search }) {
       }}
     >
       <Input.Search
-        placeholder="Type here to search"
+        placeholder={t("search_for_movies")}
         onSearch={handleOnSubmit}
         enterButton
         style={{
